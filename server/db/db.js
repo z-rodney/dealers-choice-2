@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize")
-const dbUrl = process.env.DATABASE_URL || ''
-//initialize your db, don't forget to include the possible heroku database URL
-const db = new Sequelize(dbURL)
+const dbUrl = process.env.DATABASE_URL || 'postgres://localhost/skincare-share'
+const db = new Sequelize(dbUrl)
 
 //export your db
 
