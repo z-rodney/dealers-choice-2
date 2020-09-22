@@ -2,3 +2,24 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
+
+header, nav {
+  display: flex;
+}
+
+nav {
+  flex-grow: 3;
+  justify-content: flex-end;
+  justify-self: flex-end;
+}
+
+nav a {
+  text-decoration: none;
+  text-align: left;
+  font-size: 2em;
+  margin: .2em 1em;
+}
+
+header p {
+  flex-grow: 1;
+}

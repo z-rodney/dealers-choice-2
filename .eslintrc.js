@@ -22,6 +22,7 @@ module.exports = {
     ],
     "rules": {
         "react/prop-types": [0],
-        "react-redux/prefer-separate-component-file": [0]
+        "react-redux/prefer-separate-component-file": [0],
+        "react-redux/mapDispatchToProps-prefer-shorthand": [0]
     }
 };

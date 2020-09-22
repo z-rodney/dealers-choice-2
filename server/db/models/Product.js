@@ -1,9 +1,8 @@
+const { db } = require('../db')
 const Sequelize = require("sequelize")
 const { STRING, ENUM } = Sequelize
-const db = require('../db')
 //import your db
 
-//define your model
 const Product = db.define('product', {
   name: {
     type: STRING,
@@ -11,10 +10,13 @@ const Product = db.define('product', {
       notEmpty: true
     },
     description: STRING,
-    appliedAt: ENUM('AM', 'PM', 'AM/PM')
+    appliedAt: ENUM('AM', 'PM', 'AM/PM'),
+    productType: ENUM('Cleanser', 'Mask', 'Moisturizer', 'Serum', 'Sunscreen', 'Toner', 'Multi-purpose', 'Other'),
+    imageUrl: STRING,
+    skinType: ENUM('Oily', 'Dry', 'Combo', 'All')
   }
 })
 //define any class or instance methods
 
-//export your model
+
 module.exports = Product

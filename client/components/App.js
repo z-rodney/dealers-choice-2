@@ -1,8 +1,10 @@
 import React from "react"
 import { connect } from 'react-redux'
 import { HashRouter as Router, Route } from 'react-router-dom'
-import ErrorPage from './ErrorPage'
+//import ErrorPage from './ErrorPage'
 import Header from './Header'
+import Home from './Home'
+import ProductsList from './ProductsList'
 
 //import any sub-components
 
@@ -16,14 +18,14 @@ class _App extends React.Component {
 			<Router>
 			<Header/>
 			<div>
-					<ErrorPage />
-					<Route path='/products' exact />
-					<Route path='/products/add' exact />
-					<Route path='/products/:id' exact/>
+					<Route path='/' exact component={Home}/>
+					<Route path='/products' component={ProductsList} />
+					<Route path='/products/add' />
+					<Route path='/products/:id'/>
 			</div>
 			</Router>
 		)
 	}
 }
 
-export default connect()(_App)
+export default connect(null, null)(_App)
