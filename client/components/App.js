@@ -5,6 +5,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import Header from './Header'
 import Home from './Home'
 import ProductsList from './ProductsList'
+import SingleProduct from './SingleProduct'
 
 //import any sub-components
 
@@ -19,9 +20,9 @@ class _App extends React.Component {
 			<Header/>
 			<div>
 					<Route path='/' exact component={Home}/>
-					<Route path='/products' component={ProductsList} />
+					<Route path='/products' exact component={ProductsList} />
 					<Route path='/products/add' />
-					<Route path='/products/:id'/>
+					<Route path='/products/:id' exact component={SingleProduct}/>
 			</div>
 			</Router>
 		)

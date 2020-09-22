@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 class ProductsList extends Component {
   async componentDidMount() {
-    console.log(this.props)
     this.props.fetchProducts()
   }
 
