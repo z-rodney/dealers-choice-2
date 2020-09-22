@@ -1,27 +1,27 @@
 const zainaRoutine = [
   {
     name: 'Aveeno Clear Complexion Foaming Cleanser',
-    produtType: 'Cleanser',
+    productType: 'Cleanser',
     appliedAt: 'AM/PM'
   },
   {
     name: 'Simple Water Boost Micellar Water',
-    produtType: 'Cleanser',
+    productType: 'Cleanser',
     appliedAt: 'PM'
   },
   {
     name: 'Rose water + Glycerin',
-    produtType: 'Multi-purpose',
+    productType: 'Multi-purpose',
     appliedAt: 'AM/PM'
   },
   {
     name: 'Etude House Sunprise Mild Watery Light SPF50+',
-    produtType: 'Sunscreen',
+    productType: 'Sunscreen',
     appliedAt: 'AM'
   },
   {
-    name: 'Clinique Dramatically Different Moisturizsing Gel',
-    produtType: 'Cleanser',
+    name: 'Clinique Dramatically Different Moisturizing Gel',
+    productType: 'Cleanser',
     appliedAt: 'PM'
   },
 ]

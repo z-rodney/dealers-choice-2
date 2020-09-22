@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { fetchProducts } from '../store'
+import { fetchProducts, selectProduct } from '../store'
 import { Link } from 'react-router-dom'
+
 
 class ProductsList extends Component {
   async componentDidMount() {
@@ -9,14 +10,14 @@ class ProductsList extends Component {
   }
 
   render() {
-     const {products} = this.props
+     const {products, selectProduct} = this.props
     return (
       <div>
-        <h1>Product Used by Your Friends</h1>
+        <h1>Products Used by Your Friends</h1>
         <ul>
           { products.map(product => {
             return (
-            <li key={product.id}>
+            <li key={product.id} className="product-list">
               <Link to={`/products/${product.id}`} >{product.name}</Link>
             </li>
             )

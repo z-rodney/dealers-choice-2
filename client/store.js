@@ -3,13 +3,21 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 
 //ACTION TYPES
+const SELECT_PRODUCT = 'SELECT_PRODUCT'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
+
 //ACTION CREATORS
+export const selectProduct = (product) => ({
+  type: SELECT_PRODUCT,
+    product
+})
+
 const getProducts = (products) => ({
   type: GET_PRODUCTS,
   products
 })
+
 
 //THUNK CREATORS
 export const fetchProducts = () => {
@@ -34,8 +42,19 @@ const productsReducer = (state = [], action) => {
   }
 }
 
+const selectedProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SELECT_PRODUCT:
+      state = action.product
+      return state
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
+  selectedProduct: selectedProductReducer
   }
 )
 

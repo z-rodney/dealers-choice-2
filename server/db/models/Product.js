@@ -8,13 +8,13 @@ const Product = db.define('product', {
     type: STRING,
     validate: {
       notEmpty: true
-    },
-    description: STRING,
-    appliedAt: ENUM('AM', 'PM', 'AM/PM'),
-    productType: ENUM('Cleanser', 'Mask', 'Moisturizer', 'Serum', 'Sunscreen', 'Toner', 'Multi-purpose', 'Other'),
-    imageUrl: STRING,
-    skinType: ENUM('Oily', 'Dry', 'Combo', 'All')
-  }
+    }
+  },
+  description: STRING,
+  appliedAt: ENUM('AM', 'PM', 'AM/PM'),
+  productType: ENUM('Cleanser', 'Mask', 'Moisturizer', 'Serum', 'Sunscreen', 'Toner', 'Multi-purpose', 'Other'),
+  imageUrl: STRING,
+  skinType: ENUM('Oily', 'Dry', 'Combo', 'All')
 })
 //define any class or instance methods
 
