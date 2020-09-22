@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize")
-const { STRING } = Sequelize
+const { STRING, ENUM } = Sequelize
 const db = require('../db')
 //import your db
 
@@ -10,7 +10,8 @@ const Product = db.define('product', {
     validate: {
       notEmpty: true
     },
-    description: STRING
+    description: STRING,
+    appliedAt: ENUM('AM', 'PM', 'AM/PM')
   }
 })
 //define any class or instance methods

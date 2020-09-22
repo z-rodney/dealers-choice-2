@@ -1,7 +1,8 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { HashRouter as Router } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
+import Header from './Header'
 
 //import any sub-components
 
@@ -13,8 +14,12 @@ class _App extends React.Component {
 	render() {
 		return (
 			<Router>
+			<Header/>
 			<div>
-				<ErrorPage/>
+					<ErrorPage />
+					<Route path='/products' exact />
+					<Route path='/products/add' exact />
+					<Route path='/products/:id' exact/>
 			</div>
 			</Router>
 		)
