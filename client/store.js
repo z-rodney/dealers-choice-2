@@ -3,19 +3,19 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 
 //ACTION TYPES
-const SELECT_PRODUCT = 'SELECT_PRODUCT'
 const GET_PRODUCTS = 'GET_PRODUCTS'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 
 //ACTION CREATORS
-export const selectProduct = (product) => ({
-  type: SELECT_PRODUCT,
-    product
-})
-
 const getProducts = (products) => ({
   type: GET_PRODUCTS,
   products
+})
+
+const deleteProduct = (id) => ({
+  type: DELETE_PRODUCT,
+  id
 })
 
 
@@ -26,6 +26,21 @@ export const fetchProducts = () => {
     dispatch(getProducts(products.data))
   }
 }
+
+export const removeProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/api/products/${id}`)
+      if (response.status === 204) {
+        dispatch(deleteProduct(id))
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 //INITIAL STATE
 /* const initialState = {
   products: []
@@ -37,24 +52,16 @@ const productsReducer = (state = [], action) => {
     case GET_PRODUCTS:
       state = action.products;
       return state;
-    default:
-      return state
-  }
-}
-
-const selectedProductReducer = (state = {}, action) => {
-  switch (action.type) {
-    case SELECT_PRODUCT:
-      state = action.product
-      return state
+    case DELETE_PRODUCT:
+      const newState = state.products.filter(product => product.id !== action.id)
+      return newState
     default:
       return state
   }
 }
 
 const reducer = combineReducers({
-  products: productsReducer,
-  selectedProduct: selectedProductReducer
+  products: productsReducer
   }
 )
 

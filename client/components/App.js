@@ -6,6 +6,7 @@ import Header from './Header'
 import Home from './Home'
 import ProductsList from './ProductsList'
 import SingleProduct from './SingleProduct'
+import AddProduct from './AddProduct'
 
 //import any sub-components
 
@@ -21,7 +22,7 @@ class _App extends React.Component {
 			<div>
 					<Route path='/' exact component={Home}/>
 					<Route path='/products' exact component={ProductsList} />
-					<Route path='/products/add' />
+					<Route path='/add' exact component={AddProduct}/>
 					<Route path='/products/:id' exact component={SingleProduct}/>
 			</div>
 			</Router>

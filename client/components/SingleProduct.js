@@ -1,14 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {removeProduct} from '../store'
 
 const SingleProduct = (props) => {
-  const { product } =  props
+  const { product, removeProduct } =  props
   return (
-    <div className='single-product'>
+    <div>
       <h3>{product.name}</h3>
       <p>Product type: {product.productType}</p>
       <p>About this product: {product.description}</p>
       <p>Application: {product.appliedAt}</p>
+      <button onClick={()=>removeProduct(product.id)}>Remove Recommendation</button>
     </div>
   )
 }
@@ -20,4 +22,10 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(SingleProduct)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeProduct: (id) => dispatch(removeProduct(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
