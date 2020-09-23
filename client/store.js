@@ -5,6 +5,7 @@ import axios from 'axios'
 //ACTION TYPES
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 
 //ACTION CREATORS
@@ -16,6 +17,11 @@ const getProducts = (products) => ({
 const deleteProduct = (id) => ({
   type: DELETE_PRODUCT,
   id
+})
+
+const addProduct = (product) => ({
+  type: ADD_PRODUCT,
+  product
 })
 
 
@@ -41,6 +47,18 @@ export const removeProduct = (id) => {
   }
 }
 
+export const createProduct = (product) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/api/products', product)
+      dispatch(addProduct(response.data))
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 //INITIAL STATE
 /* const initialState = {
   products: []
@@ -55,6 +73,8 @@ const productsReducer = (state = [], action) => {
     case DELETE_PRODUCT:
       const newState = state.products.filter(product => product.id !== action.id)
       return newState
+    case ADD_PRODUCT:
+      return [...state, action.product]
     default:
       return state
   }
@@ -64,7 +84,6 @@ const reducer = combineReducers({
   products: productsReducer
   }
 )
-
 
 const store = createStore(reducer, applyMiddleware(thunk))
 

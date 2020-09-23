@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createProduct } from '../store'
 
 class AddProduct extends Component {
   constructor() {
@@ -12,6 +14,7 @@ class AddProduct extends Component {
       imageUrl: ''
     },
     this.handleChange = this.handleChange.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
 
   handleChange(event) {
@@ -20,11 +23,17 @@ class AddProduct extends Component {
     this.setState({[name]: value})
   }
 
+  handleSave(event) {
+    event.preventDefault()
+    const product = { ...this.state }
+    this.props.createProduct(product)
+  }
+
   render() {
     return (
       <div>
         <h3>Drop Your Recommendation</h3>
-        <form>
+        <form onSubmit={this.handleSave}>
           <label>Name: <input name='name' onChange={this.handleChange}/> </label>
 
           <label>Description: <input name='description' onChange={this.handleChange} /> </label>
@@ -62,11 +71,18 @@ class AddProduct extends Component {
             </select>
           </label>
 
-          <label>Image URL: <input name='imageUrl' onChange={this.handleChange}/> </label>
+          <label>Image URL: <input name='imageUrl' onChange={this.handleChange} /> </label>
+          <button>Create</button>
         </form>
       </div>
     )
   }
 }
 
-export default AddProduct
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createProduct: (product) => dispatch(createProduct(product))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddProduct)
