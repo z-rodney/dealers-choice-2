@@ -1,27 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-class SingleProduct extends Component {
-  componentDidMount() {
-    //console.log(this.props)
-    this.props.product = this.props.products.find(elem => elem.id === this.props.match.params.id * 1)
-    console.log(this.props.product)
-    //console.log(this.props.setProduct(product))
-  }
-
-  render() {
-    //const {product} = this.props
-    return (
-      //<h3>{this.props.product.name}</h3>
-      //<p>{this.props}</p>
-    )
-  }
+const SingleProduct = (props) => {
+  const { product } =  props
+  return (
+    <div className='single-product'>
+      <h3>{product.name}</h3>
+      <p>Product type: {product.productType}</p>
+      <p>About this product: {product.description}</p>
+      <p>Application: {product.appliedAt}</p>
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => {
-  const { products } = state
+const mapStateToProps = (state, ownProps) => {
+  const product = state.products.find(elem => elem.id === ownProps.match.params.id * 1)
   return {
-    products
+    product
   }
 }
 

@@ -10,7 +10,10 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  description: STRING,
+  description: {
+    type: STRING,
+    defaultValue: 'Recommended by a friend.'
+  },
   appliedAt: ENUM('AM', 'PM', 'AM/PM'),
   productType: ENUM('Cleanser', 'Mask', 'Moisturizer', 'Serum', 'Sunscreen', 'Toner', 'Multi-purpose', 'Other'),
   imageUrl: STRING,

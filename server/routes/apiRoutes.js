@@ -12,6 +12,15 @@ router.param('id', async (req, res, next, id) => {
   }
 })
 
+router.post('/products', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body)
+    res.send(product)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.get('/products', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -21,6 +30,7 @@ router.get('/products', async (req, res, next) => {
   }
 })
 
+
 router.get('/products/:id', async (req, res, next) => {
   try {
     res.send(req.product)
@@ -29,10 +39,19 @@ router.get('/products/:id', async (req, res, next) => {
   }
 })
 
+router.put('/products/:id', async (req, res, next) => {
+  try {
+    await req.product.update(req.body)
+    res.send(req.product)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.delete('/products/:id', async (req, res, next) => {
   try {
-    const products = await Product.findAll()
-    res.send(products)
+    req.product.destroy()
+    res.sendStatus(204)
   } catch(err) {
     next(err)
   }
