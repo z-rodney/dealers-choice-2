@@ -1,7 +1,7 @@
 # drop the routine, share your skincare routine with friends
 
 - basic crud app
-- deployed to heroku:
+- deployed to heroku: https://secure-fortress-02677.herokuapp.com/#/
 
 # todos/wishlist
 - update styling
