@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createProduct, removeProduct } from '../store'
+import { createProduct, removeProduct, editProduct } from '../store'
 
 class AddProduct extends Component {
   constructor() {
@@ -23,21 +23,20 @@ class AddProduct extends Component {
     }
   }
 
+  componentDidUpdate() {
+    
+  }
+
   handleChange(event) {
     const name = event.target.name
     const value = event.target.value
     this.setState({[name]: value})
   }
 
-  handleUpdate(event) {
-    event.preventDefault()
-    
-  }
-
   handleSave(event) {
     event.preventDefault()
     const product = { ...this.state }
-    this.props.createProduct(product)
+    this.props.product ? this.props.editProduct(product) : this.props.createProduct(product)
   }
 
   render() {
@@ -87,14 +86,8 @@ class AddProduct extends Component {
           </label>
 
           <label>Image URL: <input name='imageUrl' value={imageUrl} onChange={this.handleChange} /> </label>
-
-          {this.props.product ?
-            <span>
-              <button>Update</button> <button>Delete</button>
-            </span>
-            :
-            <button>Create</button>
-            }
+          <button onClick={this.handleSave}>Save</button>
+          { this.props.product ? <button onClick={() => removeProduct(this.props.product.id)}>Delete</button> : null}
         </form>
       </div>
     )
@@ -109,7 +102,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createProduct: (product) => dispatch(createProduct(product))
+    createProduct: (product) => dispatch(createProduct(product)),
+    editProduct: (product) => dispatch(editProduct(product)),
+    removeProduct: (id) => dispatch(removeProduct(id))
   }
 }
 

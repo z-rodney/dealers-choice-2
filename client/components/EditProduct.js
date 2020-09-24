@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 class EditProduct extends Component {
   constructor() {
     super()
-    
+
   }
   componentDidMount() {
    if (!this.props.product) {

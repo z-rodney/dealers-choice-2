@@ -6,6 +6,7 @@ import axios from 'axios'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 
 //ACTION CREATORS
@@ -21,6 +22,11 @@ const deleteProduct = (id) => ({
 
 const addProduct = (product) => ({
   type: ADD_PRODUCT,
+  product
+})
+
+const updateProduct = (product) => ({
+  type: UPDATE_PRODUCT,
   product
 })
 
@@ -59,6 +65,17 @@ export const createProduct = (product) => {
   }
 }
 
+export const editProduct = (product) => {
+  return async (dispatch) => {
+    try {
+      const newProduct = await axios.put(`/api/products/${product.id}`, product)
+      dispatch(updateProduct(newProduct.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 //INITIAL STATE
 /* const initialState = {
   products: []
@@ -71,8 +88,17 @@ const productsReducer = (state = [], action) => {
       state = action.products;
       return state;
     case DELETE_PRODUCT:
-      const newState = state.products.filter(product => product.id !== action.id)
+      const newState = state.filter(product => product.id !== action.id)
       return newState
+    case UPDATE_PRODUCT:
+      const updatedState = state.map(product => {
+        if (product.id === action.product.id) {
+          return action.product
+        } else {
+          return product
+        }
+      })
+      return updatedState
     case ADD_PRODUCT:
       return [...state, action.product]
     default:
