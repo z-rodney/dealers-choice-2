@@ -42,10 +42,8 @@ export const fetchProducts = () => {
 export const removeProduct = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/api/products/${id}`)
-      if (response.status === 204) {
-        dispatch(deleteProduct(id))
-      }
+      await axios.delete(`/api/products/${id}`)
+      dispatch(deleteProduct(id))
     }
     catch (err) {
       console.log(err)
