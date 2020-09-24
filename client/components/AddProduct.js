@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createProduct } from '../store'
+import { createProduct, removeProduct } from '../store'
 
 class AddProduct extends Component {
   constructor() {
@@ -17,10 +17,21 @@ class AddProduct extends Component {
     this.handleSave = this.handleSave.bind(this)
   }
 
+  componentDidMount() {
+    if (this.props.product) {
+      this.setState({...this.props.product})
+    }
+  }
+
   handleChange(event) {
     const name = event.target.name
     const value = event.target.value
     this.setState({[name]: value})
+  }
+
+  handleUpdate(event) {
+    event.preventDefault()
+    
   }
 
   handleSave(event) {
@@ -30,17 +41,19 @@ class AddProduct extends Component {
   }
 
   render() {
+    const { name, description, productType, appliedAt, skinType, imageUrl } = this.state
     return (
       <div>
         <h3>Drop Your Recommendation</h3>
         <form onSubmit={this.handleSave}>
-          <label>Name: <input name='name' onChange={this.handleChange}/> </label>
+          <label>Name: <input name='name' value={name} onChange={this.handleChange}/> </label>
 
-          <label>Description: <input name='description' onChange={this.handleChange} /> </label>
+          <label>Description: <input name='description' value={description} onChange={this.handleChange} /> </label>
 
           <label>
             Product Type:
-            <select name='productType' onChange={this.handleChange}>
+            <select name='productType' value={productType} onChange={this.handleChange}>
+              <option value=''></option>
               <option value='Cleanser'>Cleanser</option>
               <option value='Mask'>Mask</option>
               <option value='Moisturizer'>Moisturizer</option>
@@ -54,7 +67,8 @@ class AddProduct extends Component {
 
           <label>
             Application:
-            <select name='appliedAt' onChange={this.handleChange}>
+            <select name='appliedAt' value={appliedAt} onChange={this.handleChange}>
+              <option value=''></option>
               <option value='AM'>AM</option>
               <option value='PM'>PM</option>
               <option value='AM/PM'>AM/PM</option>
@@ -63,7 +77,8 @@ class AddProduct extends Component {
 
           <label>
             Skin Type:
-            <select name='skinType' onChange={this.handleChange}>
+            <select name='skinType' value={skinType} onChange={this.handleChange}>
+              <option value=''></option>
               <option value='Oily'>Oily</option>
               <option value='Dry'>Dry</option>
               <option value='Combo'>Combo</option>
@@ -71,11 +86,24 @@ class AddProduct extends Component {
             </select>
           </label>
 
-          <label>Image URL: <input name='imageUrl' onChange={this.handleChange} /> </label>
-          <button>Create</button>
+          <label>Image URL: <input name='imageUrl' value={imageUrl} onChange={this.handleChange} /> </label>
+
+          {this.props.product ?
+            <span>
+              <button>Update</button> <button>Delete</button>
+            </span>
+            :
+            <button>Create</button>
+            }
         </form>
       </div>
     )
+  }
+}
+const mapStateToProps = (state, ownProps) => {
+  const product = state.products.find(elem => elem.id === ownProps.match.params.id * 1)
+  return {
+    product
   }
 }
 
@@ -85,4 +113,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)

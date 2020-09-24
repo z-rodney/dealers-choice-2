@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { fetchProducts } from '../store'
 import { Link } from 'react-router-dom'
+import ProductSummary from './ProductSummary'
 
 
 class ProductsList extends Component {
@@ -17,9 +18,7 @@ class ProductsList extends Component {
         <ul>
           { products.map(product => {
             return (
-            <li key={product.id} className="product-list">
-              <Link to={`/products/${product.id}`} >{product.name}</Link>
-            </li>
+              <ProductSummary key={product.id} product={product}/>
             )
           })
         }

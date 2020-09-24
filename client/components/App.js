@@ -5,10 +5,8 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import Header from './Header'
 import Home from './Home'
 import ProductsList from './ProductsList'
-import SingleProduct from './SingleProduct'
+//import EditProduct from './EditProduct'
 import AddProduct from './AddProduct'
-
-//import any sub-components
 
 class _App extends React.Component {
 	//constructor to initialize state
@@ -23,7 +21,7 @@ class _App extends React.Component {
 					<Route path='/' exact component={Home}/>
 					<Route path='/products' exact component={ProductsList} />
 					<Route path='/add' exact component={AddProduct}/>
-					<Route path='/products/:id' exact component={SingleProduct}/>
+					<Route path='/products/:id' exact component={AddProduct}/>
 			</div>
 			</Router>
 		)
