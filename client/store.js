@@ -100,7 +100,7 @@ const productsReducer = (state = [], action) => {
       })
       return updatedState
     case ADD_PRODUCT:
-      return [...state, action.product]
+      return [action.product, ...state]
     default:
       return state
   }

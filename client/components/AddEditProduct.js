@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { createProduct, removeProduct, editProduct } from '../store'
 
-class AddProduct extends Component {
+class AddEditProduct extends Component {
   constructor() {
     super()
     this.state = {
@@ -15,6 +16,7 @@ class AddProduct extends Component {
     },
     this.handleChange = this.handleChange.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -24,7 +26,7 @@ class AddProduct extends Component {
   }
 
   componentDidUpdate() {
-    
+
   }
 
   handleChange(event) {
@@ -37,6 +39,12 @@ class AddProduct extends Component {
     event.preventDefault()
     const product = { ...this.state }
     this.props.product ? this.props.editProduct(product) : this.props.createProduct(product)
+    this.props.history.push('/products')
+  }
+
+  handleDelete(id) {
+    this.props.removeProduct(id)
+    this.props.history.push('/products')
   }
 
   render() {
@@ -87,8 +95,10 @@ class AddProduct extends Component {
 
           <label>Image URL: <input name='imageUrl' value={imageUrl} onChange={this.handleChange} /> </label>
           <button onClick={this.handleSave}>Save</button>
-          { this.props.product ? <button onClick={() => removeProduct(this.props.product.id)}>Delete</button> : null}
+          { this.props.product ? <button onClick={() => this.handleDelete(this.props.product.id)}>Delete</button> : null}
         </form>
+
+        <Link to='products'>Back</Link>
       </div>
     )
   }
@@ -108,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(AddEditProduct)
