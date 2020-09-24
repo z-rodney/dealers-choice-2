@@ -20,13 +20,15 @@ class AddEditProduct extends Component {
   }
 
   componentDidMount() {
-    if (this.props.product) {
+    if (this.props.match.params.id && this.props.product) {
       this.setState({...this.props.product})
     }
   }
 
   componentDidUpdate() {
-
+    if (this.props.match.params.id && !this.props.product) {
+      //
+    }
   }
 
   handleChange(event) {
@@ -95,10 +97,10 @@ class AddEditProduct extends Component {
 
           <label>Image URL: <input name='imageUrl' value={imageUrl} onChange={this.handleChange} /> </label>
           <button onClick={this.handleSave}>Save</button>
-          { this.props.product ? <button onClick={() => this.handleDelete(this.props.product.id)}>Delete</button> : null}
+          { this.props.match.params.id ? <button onClick={() => this.handleDelete(this.props.product.id)}>Delete</button> : null}
         </form>
 
-        <Link to='products'>Back</Link>
+        <Link to='/products'>Back</Link>
       </div>
     )
   }

@@ -76,11 +76,6 @@ export const editProduct = (product) => {
   }
 }
 
-//INITIAL STATE
-/* const initialState = {
-  products: []
-} */
-
 //REDUCERS
 const productsReducer = (state = [], action) => {
   switch (action.type) {

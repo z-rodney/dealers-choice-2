@@ -1,12 +1,14 @@
-# things that you could put in here
+# drop the routine, share your skincare routine with friends
 
-- heroku deploy step-by-step
-- other setup step-by-step (npm, git, createdb etc)
-- any other how-to notes
+- basic crud app
+- deployed to heroku:
 
-# my advice to you
+# todos/wishlist
+- update styling
+- update components on refresh
+- add saved, updated, and deleted messages
+- add filters by product type, application, skin type
+- add users model
+- show routine by user
 
-- notice that bundle.js ends up in server/public!
-- if you change the name or location of server/public, don't forget to change your webpack too
-- if a file exports an UppercaseObject (Sequelize model or React component) capitalize the filename
-- optional: make an index.js file in /client/components which imports all your components and then exports them; that way you have one single place you can import them all from.
+
